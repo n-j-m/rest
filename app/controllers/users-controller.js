@@ -9,8 +9,29 @@ class UsersController extends BaseController {
     'last_name',
     'email',
     'username',
-    'password'
+    'password',
+    'role'
   ];
+
+  populate = async (req, res, next) => {
+    const { username } = req.params;
+
+    try {
+      const user = await User.findOne({
+        where: { username }
+      });
+
+      if (!user) {
+        const err = new Error('Not found');
+        err.status = 404;
+        return next(err);
+      }
+      req.user = user;
+      next();
+    } catch (err) {
+      next(err);
+    }
+  }
 
   search = async (req, res, next) => {
     try {

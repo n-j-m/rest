@@ -16,7 +16,7 @@ export default function authenticate (req, res, next) {
     try {
       const user = await User.findOne({ where: { id: decoded.id } });
       if (!user) {
-        return req.sendStatus(401);
+        return res.sendStatus(401);
       }
       req.currentUser = user;
       next();

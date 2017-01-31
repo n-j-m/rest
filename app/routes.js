@@ -21,7 +21,7 @@ routes.post('/users', UsersController.create);
 routes.get('/users/me', authenticate, UsersController.fetch);
 routes.put('/users/me', authenticate, UsersController.update);
 routes.delete('/users/me', authenticate, UsersController.delete);
-routes.get('/users/:username', UsersController.fetch);
+routes.get('/users/:username', UsersController.populate, UsersController.fetch);
 
 
 // Error handler
